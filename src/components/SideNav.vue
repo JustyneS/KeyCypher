@@ -24,12 +24,12 @@ export default {
 <style scoped>
 .menu {
   width: 80px; 
-  position: absolute;
+  position: fixed;
   z-index: 1;
-  top: 155px;
-  left: 0px;
+  top: 146px;
+  left: 0.5%;
   background-color: #323230; 
-  color: #4AC3BB; 
+  color: #C1E5E3; 
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -47,7 +47,7 @@ export default {
   text-align: center;
   width: 100%;
   padding-bottom: 80px;
-  padding-top: 20px;
+  padding-top: 25px;
   text-decoration: none;
 }
 
@@ -70,12 +70,12 @@ export default {
 
 button {
   background-color: transparent; 
-  color: #4AC3BB; 
+  color: #C1E5E3; 
   border: none;
   cursor: pointer; 
   outline: none;
   font-size: 40px;
-  top: -8px;
+  top: 2px;
   position: absolute;
   margin-left: 20px;
 }
@@ -85,7 +85,7 @@ a:link {
 }
 
 a:visited {
-  color: #4AC3BB;
+  color: #C1E5E3;
 }
 
 </style>

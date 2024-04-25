@@ -3,13 +3,15 @@ import { getStorage } from 'firebase/storage';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCh7Gx3SxrLSoCsHLMkiHKNN7xZYfFJsz0",
-    authDomain: "keycypher-5c760.firebaseapp.com",
-    projectId: "keycypher-5c760",
-    storageBucket: "keycypher-5c760.appspot.com",
-    messagingSenderId: "1018755860487",
-    appId: "1:1018755860487:web:be3e5818aad26338d502a2"
-  };
+  apiKey: "AIzaSyDog4gaGVAAiONeTzwUIkqt3jbC5sSs4IA",
+  authDomain: "yoobeedata.firebaseapp.com",
+  databaseURL: "https://yoobeedata-default-rtdb.firebaseio.com",
+  projectId: "yoobeedata",
+  storageBucket: "yoobeedata.appspot.com",
+  messagingSenderId: "292216842527",
+  appId: "1:292216842527:web:056b6f958d206ffb97e82a",
+  measurementId: "G-ZL7008M71Z"
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -17,4 +19,3 @@ const storage = getStorage(app);
 
 
 export { storage };
-

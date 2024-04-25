@@ -13,10 +13,9 @@ export default {
 
 <style scoped>
 .header-logo {
-  width: 100%;
-  height: 22%;
+  width: 99%;
+  height: 20%;
   position: fixed;
   top: 0;
-  right: 0;
 }
 </style>
