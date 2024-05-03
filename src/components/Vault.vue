@@ -278,7 +278,7 @@ export default {
 }
 
 .vault .options button:hover {
-  background-color: #4ac3ba; /* This will change the color of the button on hover */
+  background-color: #4ac3ba; 
   color: white;
 }
 
@@ -304,11 +304,11 @@ export default {
   margin: 10px 10px;
   transition-duration: 0.4s;
   cursor: pointer;
-  border-radius: 12px; /* This will make the buttons more rounded */
+  border-radius: 12px;
 }
 
 .nav-buttons button:hover {
-  background-color: #4ac3ba; /* This will change the color of the button on hover */
+  background-color: #4ac3ba; 
   color: white;
 }
 
@@ -343,8 +343,8 @@ export default {
 
 .vault form input {
   margin-bottom: 10px; 
-  border-radius: 5px; /* This will make the input fields more rounded */
-  padding: 5px; /* This will add some space inside the input fields */
+  border-radius: 5px; 
+  padding: 5px; 
 }
 
 .vault form .button-group {
