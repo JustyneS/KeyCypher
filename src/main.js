@@ -2,9 +2,9 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import { createApp } from 'vue';
 import App from './App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import Vault from './components/Vault.vue'; 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
+import Vault from './components/Vault.vue'; 
 
 const routes = [
   {path: '/vault', component: Vault},
