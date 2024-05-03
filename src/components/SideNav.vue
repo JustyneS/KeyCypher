@@ -1,8 +1,6 @@
 <template>
   <div :class="{ menu: true, open: show, collapsed: !show }">
-    <button @click="show = !show" title="Expand">
-      <i class="fa-solid fa-arrow-right"></i>
-    </button>
+    <button @click="show = !show" title="Expand"><i class="fa-solid fa-arrow-right"></i></button>
     <li><router-link to="/vault" class="vault-link"><i class="fa-solid fa-vault fa-2xl"></i><span> Vault </span></router-link></li> 
     <li><i class="fa-solid fa-key fa-2xl"></i><span>  Generator</span></li>
     <li><i class="fa-solid fa-shield-virus fa-2xl"></i><span> Secure Score</span></li>
@@ -31,24 +29,26 @@ export default {
   background-color: #323230; 
   color: #C1E5E3; 
   overflow-x: hidden;
+  overflow-y: auto;
   transition: 0.5s;
-  padding-top: 60px;
   border-width: 15px;
-  height: 100%;
+  height: 90%;
   list-style-type: none;
   font-size: 20px;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-evenly;
 }
 
 .menu li {
   text-align: center;
   width: 100%;
-  padding-bottom: 80px;
-  padding-top: 25px;
   text-decoration: none;
+}
+.menu li:hover a{
+  color: #4ac3ba;
 }
 
 .menu.open li{
@@ -58,7 +58,6 @@ export default {
 .menu.open {
   width: 250px; 
 }
-
 .menu.collapsed li span {
   display: none;
 }
@@ -78,6 +77,10 @@ button {
   top: 2px;
   position: absolute;
   margin-left: 20px;
+}
+
+button:hover{
+  color: #4ac3ba;
 }
 
 a:link {
