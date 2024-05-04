@@ -1,28 +1,25 @@
 <template>
-    <div id="app">
-        <Header />
-        <SideNav :isLoggedIn="isLoggedIn" :auth="auth"/>
-        <router-view />
-        
-        
-      <!-- Other components go here -->
-    </div>
-  </template>
-  
-<script >
-import SideNav from './components/SideNav.vue';
+  <div id="app">
+    <Header />
+    <SideNav :isLoggedIn="isLoggedIn" />
+    <router-view />
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { useRouter } from 'vue-router';
+
 import Header from './components/Header.vue';
-import { onMounted, ref } from "vue";
-import { getAuth, onAuthStateChanged, signOut} from "firebase/auth";
-import { useRouter } from "vue-router";
+import SideNav from './components/SideNav.vue';
 
-const router = useRouter();
 const isLoggedIn = ref(false);
-const menuOpen = ref(false);
+const auth = getAuth();
+const router = useRouter();
 
-let auth;
 onMounted(() => {
-  auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     isLoggedIn.value = !!user;
   });
@@ -30,52 +27,14 @@ onMounted(() => {
 
 const handleSignOut = () => {
   signOut(auth).then(() => {
-    router.push("/");
+    router.push('/');
   });
 };
-
-  
-export default {
-  name: 'App',
-  components: {
-    Header,
-    SideNav,
-  },
-  setup() {
-    const router = useRouter();
-    const isLoggedIn = ref(false);
-    const auth = getAuth();
-
-    onMounted(() => {
-      onAuthStateChanged(auth, (user) => {
-        isLoggedIn.value = !!user;
-      });
-    });
-
-    const handleSignOut = () => {
-      signOut(auth).then(() => {
-        router.push("/sign-in");
-      });
-    };
-
-    return {
-      isLoggedIn,
-      auth,
-      handleSignOut
-    };
-  }
-};
-  </script>
-  
-  <script setup>
-import { ref } from 'vue';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
 const accountName = ref('');
 const username = ref('');
 const password = ref('');
 const url = ref('');
-
 const firestore = getFirestore();
 
 const handleSubmit = async () => {
@@ -87,7 +46,8 @@ const handleSubmit = async () => {
       url: url.value,
     });
     console.log('Document written with ID: ', docRef.id);
- 
+
+    // Reset form fields after submission
     accountName.value = '';
     username.value = '';
     password.value = '';
@@ -97,11 +57,10 @@ const handleSubmit = async () => {
   }
 };
 </script>
-  <style>
-  /* Global styles */
-  body {
-    background-color: #D9D9D9;
-  }
 
-  </style>
-  
+<style>
+/* Global styles */
+body {
+  background-color: #D9D9D9;
+}
+</style>

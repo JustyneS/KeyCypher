@@ -36,7 +36,7 @@ router.beforeEach(async (to, from, next) => {
             next();
         } else {
             alert("you dont have access!");
-            next("/");
+            next("/sign-in");
         }
     } else {
         next();

@@ -24,7 +24,7 @@ const signIn = () => {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then(() => {
       console.log("Successfully signed in!");
-      router.push("/feed");
+      router.push("/generator");
     })
     .catch((error) => {
       console.log(error.code);

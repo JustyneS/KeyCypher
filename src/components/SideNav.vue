@@ -7,11 +7,10 @@
     <li><router-link to="/generator" class="generator-link"><i class="fa-solid fa-key fa-2xl"></i><span> Generator</span></router-link></li>
     <li><i class="fa-solid fa-shield-virus fa-2xl"></i><span> Secure Score</span></li>
     <li><i class="fa-solid fa-user-gear fa-2xl"></i><span> Account Settings</span></li>
-    <li v-if="!isLoggedIn"><router-link to="/register">Register</router-link></li>
-    <li v-if="!isLoggedIn"><router-link to="/sign-in">Login</router-link></li>
-    <li @click="handleSignOut" v-if="!isLoggedIn" class="sign-out-btn">Sign out</li>
+    <li v-if="!isLoggedIn"><router-link to="/register"><i class="fa-solid fa-user-plus fa-2xl"></i><span>Register</span></router-link></li>
+    <li v-if="!isLoggedIn"><router-link to="/sign-in"><i class="fa-solid fa-sign-in-alt fa-2xl"></i><span>Login</span></router-link></li>
+    <li v-if="isLoggedIn" @click="handleSignOut" class="sign-out-btn"><i class="fa-solid fa-sign-out-alt fa-2xl"></i><span>Sign out</span></li>
   </div>
-     
 </template>
 
 <script>
@@ -29,15 +28,14 @@ export default {
 
 <script setup>
 import { defineProps } from 'vue';
-import { signOut } from 'firebase/auth'; // Import signOut from Firebase Authentication
-import { getAuth } from 'firebase/auth'; // Import getAuth to initialize auth
-import router from '@/router'; // Import the router instance from your router configuration file
+import { signOut } from 'firebase/auth';
+import { getAuth } from 'firebase/auth'; 
+import router from '@/router'; 
 
 const props = defineProps({
   isLoggedIn: Boolean,
 });
 
-// Initialize auth
 const auth = getAuth();
 
 const handleSignOut = () => {
@@ -96,6 +94,7 @@ const handleSignOut = () => {
 .menu.open li span {
   display: inline; 
   text-decoration: none;
+  margin-left:20px;
 }
 
 button {
