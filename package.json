@@ -52,6 +52,7 @@
   },
   "scripts": {
     "test": "TESTING KEYCYPHER",
+    "dev": "vue-cli-service serve",
     "serve": "vue-cli-service serve"
   },
   "repository": {

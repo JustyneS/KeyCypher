@@ -4,13 +4,18 @@
       <i class="fa-solid fa-arrow-right"></i>
     </button>
     <li><router-link to="/vault" class="vault-link"><i class="fa-solid fa-vault fa-2xl"></i><span> Vault </span></router-link></li> 
-    <li><i class="fa-solid fa-key fa-2xl"></i><span>  Generator</span></li>
+    <li><router-link to="/generator" class="generator-link"><i class="fa-solid fa-key fa-2xl"></i><span> Generator</span></router-link></li>
     <li><i class="fa-solid fa-shield-virus fa-2xl"></i><span> Secure Score</span></li>
     <li><i class="fa-solid fa-user-gear fa-2xl"></i><span> Account Settings</span></li>
+    <li v-if="!isLoggedIn"><router-link to="/register">Register</router-link></li>
+    <li v-if="!isLoggedIn"><router-link to="/sign-in">Login</router-link></li>
+    <li @click="handleSignOut" v-if="!isLoggedIn" class="sign-out-btn">Sign out</li>
   </div>
+     
 </template>
 
 <script>
+
 export default {
   name: 'SideNav',
   data() {
@@ -18,8 +23,33 @@ export default {
       show: false,
     };
   },
+  
 };
 </script>
+
+<script setup>
+import { defineProps } from 'vue';
+import { signOut } from 'firebase/auth'; // Import signOut from Firebase Authentication
+import { getAuth } from 'firebase/auth'; // Import getAuth to initialize auth
+import router from '@/router'; // Import the router instance from your router configuration file
+
+const props = defineProps({
+  isLoggedIn: Boolean,
+});
+
+// Initialize auth
+const auth = getAuth();
+
+const handleSignOut = () => {
+  signOut(auth).then(() => {
+    router.push("/sign-in");
+  });
+};
+</script>
+
+
+
+
 
 <style scoped>
 .menu {
@@ -46,7 +76,7 @@ export default {
 .menu li {
   text-align: center;
   width: 100%;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
   padding-top: 25px;
   text-decoration: none;
 }
@@ -88,4 +118,17 @@ a:visited {
   color: #C1E5E3;
 }
 
+.sign-out-btn {
+  cursor: pointer;
+  color: #fff; /* Text color */
+  border: none;
+  padding: 2px 2px; /* Adjust padding as needed */
+  border-radius: 5px; /* Rounded corners */
+  text-align: center;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.sign-out-btn:hover {
+  background-color: #f39891; /* Change the background color on hover */
+}
 </style>
