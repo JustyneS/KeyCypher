@@ -19,9 +19,9 @@ const router = useRouter();
 
 const register = () => {
   createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then(() => {
+    .then((userCredential) => {
       console.log("Successfully registered!");
-      router.push('/feed');
+      router.push('/generator');
     })
     .catch((error) => {
       console.log(error.code);
@@ -29,15 +29,19 @@ const register = () => {
     });
 };
 
+
+
+
+
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(getAuth(), provider)
     .then((result) => {
       console.log(result.user);
-      router.push("/feed");
+      router.push("/generator");
     })
     .catch((error) => {
-      console.error(error); // handle error
+      console.error(error); 
       
     });
 };
