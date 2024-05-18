@@ -7,7 +7,7 @@ const router = createRouter({
        
         { path: "/register", component: () => import("../views/Register.vue") },
         { path: "/sign-in", component: () => import("../views/Signin.vue") },
-        { path: "/vault", component: () => import("../views/Vault.vue") },
+        { path: "/vault", component: () => import("../views/Vault.vue"), meta: { requiresAuth: true } },
         { path: "/generator", component: () => import("../views/Generator.vue"),
             meta: {
                 requiresAuth:true,

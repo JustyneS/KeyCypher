@@ -1,9 +1,14 @@
 <template>
   <div class="signin-container">
     <h1>Sign in to an account</h1>
-    <p><input type="text" placeholder="Email" v-model="email" /></p>
-    <p><input type="password" placeholder="Password" v-model="password" /></p>
-    <p v-if="errMsg">{{ errMsg }}</p>
+    <p>
+      <input type="text" placeholder="Email" v-model="email" />
+    </p>
+    <p class="password-container">
+      <input :type="passwordFieldType" placeholder="Password" v-model="password" />
+      <i :class="passwordFieldIcon" @click="togglePasswordVisibility"></i>
+    </p>
+    <p v-if="errMsg" class="error-message">{{ errMsg }}</p>
     <p><button @click="signIn">Submit</button></p>
     <p><button @click="signInWithGoogle">Sign In With Google</button></p>
   </div>
@@ -18,6 +23,19 @@ const email = ref("");
 const password = ref("");
 const errMsg = ref();
 const router = useRouter();
+
+const passwordFieldType = ref("password");
+const passwordFieldIcon = ref("fa fa-eye");
+
+const togglePasswordVisibility = () => {
+  if (passwordFieldType.value === "password") {
+    passwordFieldType.value = "text";
+    passwordFieldIcon.value = "fa fa-eye-slash";
+  } else {
+    passwordFieldType.value = "password";
+    passwordFieldIcon.value = "fa fa-eye";
+  }
+};
 
 const signIn = () => {
   const auth = getAuth();
@@ -75,13 +93,26 @@ h1 {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="text"][type="password"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-container i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 button {
@@ -96,5 +127,11 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
 }
 </style>
