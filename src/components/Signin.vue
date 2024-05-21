@@ -80,9 +80,7 @@ const signInWithGoogle = () => {
 .signin-container {
   max-width: 400px;
   margin: 0 auto;
-  margin-top: 300px;
   padding: 20px;
-  border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
 }
@@ -110,7 +108,7 @@ input[type="text"][type="password"] {
 .password-container i {
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 35%;
   transform: translateY(-50%);
   cursor: pointer;
 }

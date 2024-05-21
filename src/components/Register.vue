@@ -2,7 +2,10 @@
   <div class="register-container">
     <h1>Create an account</h1>
     <p><input type="text" placeholder="Email" v-model="email" /></p>
-    <p><input type="password" placeholder="Password" v-model="password" /></p>
+    <p class="password-container">
+      <input :type="passwordFieldType" placeholder="Password" v-model="password" />
+      <i :class="passwordFieldIcon" @click="togglePasswordVisibility"></i>
+    </p>
     <p><button @click="register">Submit</button></p>
     <p><button @click="signInWithGoogle">Sign In With Google</button></p>
   </div>
@@ -29,10 +32,6 @@ const register = () => {
     });
 };
 
-
-
-
-
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(getAuth(), provider)
@@ -42,8 +41,20 @@ const signInWithGoogle = () => {
     })
     .catch((error) => {
       console.error(error); 
-      
     });
+};
+
+const passwordFieldType = ref("password");
+const passwordFieldIcon = ref("fa fa-eye");
+
+const togglePasswordVisibility = () => {
+  if (passwordFieldType.value === "password") {
+    passwordFieldType.value = "text";
+    passwordFieldIcon.value = "fa fa-eye-slash";
+  } else {
+    passwordFieldType.value = "password";
+    passwordFieldIcon.value = "fa fa-eye";
+  }
 };
 </script>
 
@@ -51,9 +62,8 @@ const signInWithGoogle = () => {
 .register-container {
   max-width: 400px;
   margin: 0 auto;
-  margin-top:300px;
   padding: 20px;
-  border: 1px solid #ccc;
+
   border-radius: 5px;
   background-color: #f9f9f9;
 }
@@ -71,6 +81,18 @@ input[type="password"] {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-container i {
+  position: absolute;
+  right: 10px;
+  top: 35%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 button {
