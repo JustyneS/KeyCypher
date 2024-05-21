@@ -46,6 +46,8 @@ export default {
   text-align: center;
   width: 100%;
   text-decoration: none;
+  padding-bottom: 40px;
+  padding-top: 25px;
 }
 .menu li:hover a{
   color: #4ac3ba;

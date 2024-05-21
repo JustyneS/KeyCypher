@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 import Vault from './components/Vault.vue'; 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const routes = [
   {path: '/vault', component: Vault},
