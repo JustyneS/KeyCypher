@@ -14,40 +14,29 @@
 </template>
 
 <script>
+import { signOut } from 'firebase/auth';
+import { getAuth } from 'firebase/auth'; 
 
 export default {
   name: 'SideNav',
+  props: {
+    isLoggedIn: Boolean,
+  },
   data() {
     return {
       show: false,
     };
   },
-  
+  methods: {
+    handleSignOut() {
+      const auth = getAuth();
+      signOut(auth).then(() => {
+        this.$router.push("/sign-in");
+      });
+    },
+  },  
 };
 </script>
-
-<script setup>
-import { defineProps } from 'vue';
-import { signOut } from 'firebase/auth';
-import { getAuth } from 'firebase/auth'; 
-import router from '@/router'; 
-
-const props = defineProps({
-  isLoggedIn: Boolean,
-});
-
-const auth = getAuth();
-
-const handleSignOut = () => {
-  signOut(auth).then(() => {
-    router.push("/sign-in");
-  });
-};
-</script>
-
-
-
-
 
 <style scoped>
 .menu {
@@ -119,15 +108,15 @@ a:visited {
 
 .sign-out-btn {
   cursor: pointer;
-  color: #fff; /* Text color */
+  color: #fff; 
   border: none;
-  padding: 2px 2px; /* Adjust padding as needed */
-  border-radius: 5px; /* Rounded corners */
+  padding: 2px 2px; 
+  border-radius: 5px;
   text-align: center;
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  transition: background-color 0.3s ease; 
 }
 
 .sign-out-btn:hover {
-  background-color: #f39891; /* Change the background color on hover */
+  background-color: #f39891; 
 }
 </style>

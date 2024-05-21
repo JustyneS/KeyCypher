@@ -1,20 +1,54 @@
 import '@fortawesome/fontawesome-free/css/all.css'
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from "./router"
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { createRouter, createWebHistory } from 'vue-router';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database';
+import Vault from './components/Vault.vue'; 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const routes = [
+  { path: "/register", component: () => import("./components/Register.vue") },
+  { path: "/sign-in", component: () => import("./components/Signin.vue") },
+  { path: "/vault", component: Vault, meta: { requiresAuth: true } },
+  { path: "/generator", component: () => import("./components/Generator.vue"), meta: { requiresAuth:true } },
+];
 
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
+
+const getCurrentUser = () => {
+  return new Promise((resolve,reject) => {
+    const removeListener = onAuthStateChanged(
+      getAuth(),
+      (user) => {
+        removeListener();
+        resolve(user);
+      },
+      reject
+    )
+  })
+}
+
+router.beforeEach(async (to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (await getCurrentUser()) {
+      next();
+    } else {
+      alert("you dont have access!");
+      next("/sign-in");
+    }
+  } else {
+    next();
+  }
+});
+ 
 const firebaseConfig = {
   apiKey: "AIzaSyDog4gaGVAAiONeTzwUIkqt3jbC5sSs4IA",
   authDomain: "yoobeedata.firebaseapp.com",
-  databaseURL: "https://yoobeedata-default-rtdb.firebaseio.com",
+  databaseURL: "https://yoobeedata-default-rtdb.firebaseio.com/",
   projectId: "yoobeedata",
   storageBucket: "yoobeedata.appspot.com",
   messagingSenderId: "292216842527",
@@ -22,12 +56,9 @@ const firebaseConfig = {
   measurementId: "G-ZL7008M71Z"
 };
 
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-initializeApp(firebaseConfig);
-
-const app = createApp(App)
-
-app.use(router)
-
-app.mount('#app')
-
+createApp(App)
+  .use(router)
+  .mount('#app');
