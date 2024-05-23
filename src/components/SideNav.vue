@@ -40,8 +40,7 @@ export default {
   width: 80px; 
   position: fixed;
   z-index: 1;
-  top: 146px;
-  left: 0.5%;
+  top: 20%;
   background-color: #323230; 
   color: #C1E5E3; 
   overflow-x: hidden;
