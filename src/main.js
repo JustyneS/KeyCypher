@@ -6,12 +6,14 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 import Vault from './components/Vault.vue'; 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import 'zxcvbn';
 
 const routes = [
   { path: "/register", component: () => import("./components/Register.vue") },
   { path: "/sign-in", component: () => import("./components/Signin.vue") },
   { path: "/vault", component: Vault, meta: { requiresAuth: true } },
   { path: "/generator", component: () => import("./components/Generator.vue"), meta: { requiresAuth:true } },
+  { path: '/secure-score', component:() => import("./components/PasswordStrengthChecker.vue") },
 ];
 
 const router = createRouter({
