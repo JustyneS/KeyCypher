@@ -10,6 +10,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 const routes = [
   { path: "/", component: () => import("./components/Signin.vue") },
   { path: "/register", component: () => import("./components/Register.vue") },
+  { path: '/', component: () => import('./components/SideNav.vue')},
+  { path: "/loginregister", component: () => import("./components/LoginRegisterModal.vue") },
   { path: "/vault", component: Vault, meta: { requiresAuth: true } },
   { path: "/generator", component: () => import("./components/Generator.vue"), meta: { requiresAuth:true } },
 ];
@@ -39,7 +41,7 @@ router.beforeEach(async (to, from, next) => {
       next();
     } else {
       alert("you dont have access!");
-      next("/sign-in");
+      next("/loginregister");
     }
   } else {
     next();
