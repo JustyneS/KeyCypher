@@ -8,11 +8,12 @@ import Vault from './components/Vault.vue';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const routes = [
+  { path: "/", component: () => import("./components/Signin.vue") },
   { path: "/register", component: () => import("./components/Register.vue") },
-  { path: "/sign-in", component: () => import("./components/Signin.vue") },
   { path: "/vault", component: Vault, meta: { requiresAuth: true } },
   { path: "/generator", component: () => import("./components/Generator.vue"), meta: { requiresAuth:true } },
 ];
+
 
 const router = createRouter({
   history: createWebHistory(),
