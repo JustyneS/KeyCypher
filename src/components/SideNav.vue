@@ -5,8 +5,7 @@
     <li><router-link to="/generator" class="generator-link"><i class="fa-solid fa-key fa-2xl"></i><span> Generator</span></router-link></li>
     <li><router-link to="/secure-score" class="score-link"><i class="fa-solid fa-shield-virus fa-2xl"></i><span> Secure Score</span></router-link></li>
     <li><i class="fa-solid fa-user-gear fa-2xl"></i><span> Account Settings</span></li>
-    <li v-if="!isLoggedIn"><router-link to="/register"><i class="fa-solid fa-user-plus fa-2xl"></i><span>Register</span></router-link></li>
-    <li v-if="!isLoggedIn"><router-link to="/sign-in"><i class="fa-solid fa-sign-in-alt fa-2xl"></i><span>Login</span></router-link></li>
+    <li v-if="!isLoggedIn"><router-link to="/loginregister"><i class="fa-solid fa-sign-in-alt fa-2xl"></i><span>Login</span></router-link></li>
     <li v-if="isLoggedIn" @click="handleSignOut" class="sign-out-btn"><i class="fa-solid fa-sign-out-alt fa-2xl"></i><span>Sign out</span></li>
   </div>
 </template>
@@ -69,6 +68,18 @@ export default {
   padding-top: 25px;
 }
 .menu li:hover a{
+  color: #4ac3ba;
+}
+.menu li a {
+  color: #C1E5E3; 
+  text-decoration: none;
+}
+
+.menu li a:hover {
+  color: #4ac3ba; 
+}
+
+.menu li .router-link-active {
   color: #4ac3ba;
 }
 

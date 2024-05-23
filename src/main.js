@@ -9,12 +9,15 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import 'zxcvbn';
 
 const routes = [
+  { path: "/", component: () => import("./components/Signin.vue") },
   { path: "/register", component: () => import("./components/Register.vue") },
-  { path: "/sign-in", component: () => import("./components/Signin.vue") },
+  { path: '/', component: () => import('./components/SideNav.vue')},
+  { path: "/loginregister", component: () => import("./components/LoginRegisterModal.vue") },
   { path: "/vault", component: Vault, meta: { requiresAuth: true } },
   { path: "/generator", component: () => import("./components/Generator.vue"), meta: { requiresAuth:true } },
   { path: '/secure-score', component:() => import("./components/PasswordStrengthChecker.vue") },
 ];
+
 
 const router = createRouter({
   history: createWebHistory(),
@@ -40,7 +43,7 @@ router.beforeEach(async (to, from, next) => {
       next();
     } else {
       alert("you dont have access!");
-      next("/sign-in");
+      next("/loginregister");
     }
   } else {
     next();
