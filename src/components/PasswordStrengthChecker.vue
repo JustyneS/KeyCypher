@@ -2,7 +2,7 @@
     <div class="password-strength-checker">
       <h1>Password Strength Checker</h1>
       <div v-for="(account, index) in sortedAccounts" :key="index">
-        <h2>{{ account.name }}</h2>
+        
         <p>Website: {{ account.name }}</p>
         <p>Email: {{ account.email }}</p>
         <p>
@@ -103,10 +103,18 @@
 
 
   <style scoped>
+
+
   .password-strength-checker {
-    margin-top: 200px;
-    margin-left:600px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12%;
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
+}
+
   
 .passStrField {
     margin-bottom: 0px;
