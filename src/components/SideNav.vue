@@ -28,7 +28,7 @@ export default {
     handleSignOut() {
       const auth = getAuth();
       signOut(auth).then(() => {
-        this.$router.push("/sign-in");
+        this.$router.push("/loginregister");
       });
     },
   },  

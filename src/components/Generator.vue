@@ -1,29 +1,5 @@
 <template>
-  <div class="form">
-  <h2>Add New Account</h2>
-  <form  @submit.prevent="handleSubmit">
-    <div class="form-group">
-      <label for="accountName">Account Name:</label>
-      <input type="text" id="accountName" v-model="accountName" @keyup.enter="handleSubmit">
-    </div>
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" id="username" v-model="username" @keyup.enter="handleSubmit">
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" id="password" v-model="password" @keyup.enter="handleSubmit">
-    </div>
-    <div class="form-group">
-      <label for="url">URL:</label>
-      <input type="url" id="url" v-model="url" @keyup.enter="handleSubmit">
-    </div>
-    <div class="button-group">
-    <button type="submit" class="save-btn">Save</button>
-    <button class="cancel-btn">Cancel</button>
-  </div>
-  </form>
-</div>
+
     <div class="password-generator">
       <h2>Password Generator</h2>
       <div class="length-slider">
@@ -117,87 +93,11 @@ const handleSubmit = async () => {
 
   
   <style scoped>
-  .form {
-  max-width: 400px;
-  margin: 0 auto;
-  margin-top: 200px;
-  padding: 50px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #a4cecc;
-}
-
-.form h2 {
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
-}
-
-.form-group input[type="text"],
-.form-group input[type="password"],
-.form-group input[type="url"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  
-}
-
-.form-group input[type="text"]:focus,
-.form-group input[type="password"]:focus,
-.form-group input[type="url"]:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-
-.form-group input[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-.button-group {
-  display: flex;
-  justify-content:center;
-}
-
-.save-btn,
-.cancel-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 20px;
-}
-
-.save-btn {
-  background-color: #28a745;
-  color: #fff;
-}
-
-.cancel-btn {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.save-btn:hover,
-.cancel-btn:hover {
-  opacity: 0.8;
-}
 
  .password-generator {
   max-width: 400px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top:300px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
