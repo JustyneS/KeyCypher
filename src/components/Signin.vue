@@ -68,7 +68,7 @@ const signInWithGoogle = () => {
   signInWithPopup(getAuth(), provider)
     .then((result) => {
       console.log(result.user);
-      router.push("/generator");
+      router.push("/vault");
     })
     .catch((error) => {
       // handle error
