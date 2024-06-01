@@ -9,7 +9,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import 'zxcvbn';
 
 const routes = [
-  { path: "/", component: () => import("./components/Signin.vue") },
+  
   { path: "/register", component: () => import("./components/Register.vue") },
   { path: '/', component: () => import('./components/LoginRegisterModal.vue')},
   { path: "/loginregister", component: () => import("./components/LoginRegisterModal.vue") },
