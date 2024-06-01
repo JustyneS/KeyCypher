@@ -93,7 +93,7 @@ const resetSession = () => {
 
 // Function to start the session timer
 const startSessionTimer = () => {
-  sessionTimeout = setTimeout(resetSession, 900000); 
+  sessionTimeout = setTimeout(resetSession, 900000); // set 15 minutes limit
 };
 
 // Function to clear the session timer

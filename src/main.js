@@ -11,7 +11,7 @@ import 'zxcvbn';
 const routes = [
   { path: "/", component: () => import("./components/Signin.vue") },
   { path: "/register", component: () => import("./components/Register.vue") },
-  { path: '/', component: () => import('./components/SideNav.vue')},
+  { path: '/', component: () => import('./components/LoginRegisterModal.vue')},
   { path: "/loginregister", component: () => import("./components/LoginRegisterModal.vue") },
   { path: "/vault", component: Vault, meta: { requiresAuth: true } },
   { path: "/generator", component: () => import("./components/Generator.vue"), meta: { requiresAuth:true } },
