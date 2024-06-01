@@ -15,9 +15,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { ref, watch } from "vue";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { useRouter } from "vue-router";
+
 
 const email = ref("");
 const password = ref("");
@@ -39,6 +40,15 @@ const togglePasswordVisibility = () => {
 
 const signIn = () => {
   const auth = getAuth();
+  const emailValue = email.value.trim(); 
+  const passwordValue = password.value.trim(); 
+
+  if (!emailValue || !passwordValue) {
+    errMsg.value = "Email and password fields can't be empty";
+    return; 
+  }
+
+
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then(() => {
       console.log("Successfully signed in!");
@@ -71,10 +81,50 @@ const signInWithGoogle = () => {
       router.push("/vault");
     })
     .catch((error) => {
-      // handle error
+      
     });
 };
+
+let sessionTimeout;
+const resetSession = () => {
+  errMsg.value = "Session timed out. Please sign in again.";
+  signOutUser(); 
+};
+
+// Function to start the session timer
+const startSessionTimer = () => {
+  sessionTimeout = setTimeout(resetSession, 900000); 
+};
+
+// Function to clear the session timer
+const clearSessionTimer = () => {
+  clearTimeout(sessionTimeout);
+};
+
+// Watch for changes in email and password fields and restart the session timer
+watch([email, password], () => {
+  clearSessionTimer(); // Clear the existing timer
+  startSessionTimer(); // Start a new timer
+});
+
+// Function to sign out the user
+const signOutUser = () => {
+  const auth = getAuth();
+  signOut(auth)
+    .then(() => {
+      console.log("User signed out");
+      
+      router.push("/signin");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+
+startSessionTimer();
 </script>
+
 
 <style scoped>
 .signin-container {
