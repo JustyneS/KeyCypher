@@ -38,7 +38,7 @@
     "undici": "^5.28.4",
     "undici-types": "^5.26.5",
     "vue": "^3.4.27",
-    "vue-router": "^4.0.13",
+    "vue-router": "^4.3.2",
     "vuex": "^4.1.0",
     "websocket-driver": "^0.7.4",
     "websocket-extensions": "^0.1.4",
@@ -49,6 +49,7 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
+    "@types/zxcvbn": "^4.4.4",
     "@vue/cli-service": "^5.0.8"
   },
   "scripts": {
