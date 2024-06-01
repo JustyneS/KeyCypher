@@ -18,13 +18,13 @@
   
   <script setup>
   import { ref, defineEmits } from 'vue';
-  import { useRouter } from 'vue-router'; // Import useRouter correctly
+  import { useRouter } from 'vue-router';
   import Signin from './Signin.vue';
   import Register from './Register.vue';
   
   const emits = defineEmits(['close']);
   const activeTab = ref('sign-in');
-  const router = useRouter(); // Use useRouter correctly
+  const router = useRouter(); 
   
   const handleClose = () => {
     console.log("Close button clicked");
@@ -67,7 +67,7 @@
 
 .tabs {
   display: flex;
-  align-items: center; /* Center the tabs vertically */
+  align-items: center; 
 }
 
 .tabs button {
@@ -76,7 +76,7 @@
   color: #007bff;
   cursor: pointer;
   border-radius: 5px 5px 0 0;
-  position: relative; /* Ensure proper positioning of the line */
+  position: relative; 
 }
 
 .tabs button.active {
@@ -87,24 +87,24 @@
 .tabs button.hovered::before {
   content: "";
   position: absolute;
-  bottom: -2px; /* Adjust position to align with the button text */
+  bottom: -2px; 
   left: 0;
   width: 100%;
-  height: 2px; /* Thickness of the line */
-  background-color: #007bff; /* Color of the line */
-  transform: scaleX(0); /* Initially hide the line */
-  transition: transform 0.3s ease; /* Add animation to the line */
+  height: 2px; 
+  background-color: #007bff; 
+  transform: scaleX(0); 
+  transition: transform 0.3s ease; 
 }
 
 .tabs button.hovered:hover::before {
-  transform: scaleX(1); /* Expand the line on hover */
+  transform: scaleX(1); 
 }
 
 .divider {
   width: 1px;
-  height: 20px; /* Adjust height to match the button height */
-  background-color: #ccc; /* Color of the divider */
-  margin: 0 10px; /* Adjust spacing */
+  height: 20px; 
+  background-color: #ccc; 
+  margin: 0 10px; 
 }
 
 </style>
