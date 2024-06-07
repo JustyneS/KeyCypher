@@ -1,7 +1,7 @@
 <template>
     <div class="password-strength-checker">
       <h1>Password Strength Checker</h1>
-      <div v-for="(account, index) in sortedAccounts" :key="index">
+      <div v-for="(account, index) in sortedAccounts" :key="index" class="entry">
         
         <p>Website: {{ account.name }}</p>
         <p>Email: {{ account.email }}</p>
@@ -13,7 +13,7 @@
             <input v-model="account.updatedPassword" type="password">
             <button @click="savePassword(account)">Save</button>
           </span>
-          <button v-if="!account.editing" @click="togglePasswordVisibility(account)">
+          <button v-if="!account.editing" class="eye-button" @click="togglePasswordVisibility(account)">
             <i :class="account.showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'" :title="account.showPassword ? 'Hide' : 'Show'"></i>
           </button>
         </p>
@@ -103,7 +103,10 @@
 
 
   <style scoped>
-
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
 
   .password-strength-checker {
   display: flex;
@@ -111,11 +114,39 @@
   align-items: center;
   justify-content: center;
   margin-top: 12%;
-  margin-left: auto; /* Center horizontally */
-  margin-right: auto; /* Center horizontally */
+  margin-left: auto; 
+  margin-right: auto; 
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc; 
+  border-radius: 12px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  width: 500px; 
+  max-width: 60%; 
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: larger;
 }
 
-  
+.entry {
+  border-bottom: 1px solid #ccc; 
+  padding-bottom: 10px; 
+  margin-bottom: 10px; 
+  width: 300px;
+}
+
+.eye-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 20px;
+  cursor: pointer;
+}  
+
+.eye-button i {
+  font-size: 18px; 
+}
+
 .passStrField {
     margin-bottom: 0px;
 }
@@ -126,29 +157,27 @@
 
   .strength-bar {
     height: 10px;
-    
     max-width: 300px;
-
   }
   
   .strength-very-weak {
-    background-color: #FF5252; /* Red */
+    background-color: #FF5252; 
   }
   
   .strength-weak {
-    background-color: #FFD740; /* Orange */
+    background-color: #FFD740; 
   }
   
   .strength-medium {
-    background-color: #FFA726; /* Deep Orange */
+    background-color: #FFA726; 
   }
   
   .strength-strong {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50; 
   }
   
   .strength-very-strong {
-    background-color: #64DD17; /* Light Green */
+    background-color: #64DD17; 
   }
   </style>
   

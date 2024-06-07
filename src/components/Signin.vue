@@ -80,6 +80,7 @@ const signInWithGoogle = () => {
 .signin-container {
   max-width: 400px;
   margin: 0 auto;
+  margin-top: 300px;
   padding: 20px;
   border-radius: 5px;
   background-color: #f9f9f9;
