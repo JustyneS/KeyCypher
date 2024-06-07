@@ -5,8 +5,7 @@
         
         <p>Website: {{ account.name }}</p>
         <p>Email: {{ account.email }}</p>
-        <p>
-          Password: 
+        <p>Password: 
           <span v-if="!account.editing && account.showPassword">{{ account.password }}</span>
           <span v-else-if="!account.editing">••••••••</span>
           <span v-else>
@@ -145,6 +144,18 @@ h1 {
 
 .eye-button i {
   font-size: 18px; 
+}
+
+.editBtn {
+  display: block;
+  width: 30%;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #4ac3ba; 
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .passStrField {
