@@ -99,9 +99,11 @@ const handleSubmit = async () => {
   margin: 0 auto;
   margin-top:300px;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #a4cecc;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc; 
+  border-radius: 5px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  font-family: Arial, Helvetica, sans-serif;
    
 }
 
