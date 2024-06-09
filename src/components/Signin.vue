@@ -52,10 +52,11 @@ const signIn = () => {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then(() => {
       console.log("Successfully signed in!");
-      router.push("/generator");
+      router.push("/vault");
     })
     .catch((error) => {
       console.log(error.code);
+
       switch (error.code) {
         case "auth/invalid-email":
           errMsg.value = "Invalid email";
@@ -93,7 +94,7 @@ const resetSession = () => {
 
 // Function to start the session timer
 const startSessionTimer = () => {
-  sessionTimeout = setTimeout(resetSession, 900000); // set 15 minutes limit
+  sessionTimeout = setTimeout(resetSession, 10000); // set 15 minutes limit
 };
 
 // Function to clear the session timer
@@ -114,7 +115,7 @@ const signOutUser = () => {
     .then(() => {
       console.log("User signed out");
       
-      router.push("/signin");
+      router.push("/loginregister");
     })
     .catch((error) => {
       console.log(error);
