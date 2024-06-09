@@ -10,7 +10,6 @@ import 'zxcvbn';
 
 const routes = [
   
-  { path: "/register", component: () => import("./components/Register.vue") },
   { path: '/', component: () => import('./components/LoginRegisterModal.vue')},
   { path: "/loginregister", component: () => import("./components/LoginRegisterModal.vue") },
   { path: "/vault", component: Vault, meta: { requiresAuth: true } },
