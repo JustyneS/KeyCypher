@@ -60,36 +60,6 @@
   };
   </script>
 
-  <script setup>
-import { ref } from 'vue';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-
-const accountName = ref('');
-const username = ref('');
-const password = ref('');
-const url = ref('');
-
-const firestore = getFirestore();
-
-const handleSubmit = async () => {
-  try {
-    const docRef = await addDoc(collection(firestore, 'accounts'), {
-      accountName: accountName.value,
-      username: username.value,
-      password: password.value,
-      url: url.value,
-    });
-    console.log('Document written with ID: ', docRef.id);
- 
-    accountName.value = '';
-    username.value = '';
-    password.value = '';
-    url.value = '';
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
-};
-</script>
 
   
   <style scoped>
