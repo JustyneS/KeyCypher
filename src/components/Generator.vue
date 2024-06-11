@@ -60,36 +60,6 @@
   };
   </script>
 
-  <script setup>
-import { ref } from 'vue';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-
-const accountName = ref('');
-const username = ref('');
-const password = ref('');
-const url = ref('');
-
-const firestore = getFirestore();
-
-const handleSubmit = async () => {
-  try {
-    const docRef = await addDoc(collection(firestore, 'accounts'), {
-      accountName: accountName.value,
-      username: username.value,
-      password: password.value,
-      url: url.value,
-    });
-    console.log('Document written with ID: ', docRef.id);
- 
-    accountName.value = '';
-    username.value = '';
-    password.value = '';
-    url.value = '';
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
-};
-</script>
 
   
   <style scoped>
@@ -99,9 +69,11 @@ const handleSubmit = async () => {
   margin: 0 auto;
   margin-top:300px;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #a4cecc;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc; 
+  border-radius: 5px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  font-family: Arial, Helvetica, sans-serif;
    
 }
 
@@ -136,7 +108,7 @@ const handleSubmit = async () => {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  background-color: #007bff;
+  background-color: #4ac3ba; 
   color: #fff;
   border: none;
   border-radius: 5px;
