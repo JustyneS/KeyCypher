@@ -9,13 +9,27 @@
 
     <!--Notes tab content-->
     <div v-show="currentTab === 'notes'" class="tab-content">
+
       <!-- Displaying Notes from Firebase -->
+
       <div v-for="note in notes" :key="note.id">
         <h2>{{ note.accountName }}</h2>
         <p>{{ note.text }}</p>
         <button @click="editNote(note)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
       </div>
     </div>
+
+    <!--Accounts tab content-->
+    <div v-show="currentTab === 'accounts'" class="tab-content">
+      <!-- Display accounts from the database here -->
+    <div class="account-list-item" v-for="account in accounts" :key="account.name">
+    <div>{{ account.name }}</div>
+    <div>{{ account.email }}</div>
+    <div v-if="account.showPassword">{{ account.password }}</div>
+      <div v-else>••••••••</div>
+      <button @click="togglePassword(account)"><i :class="account.showPassword ? 'fa-solid fa-eye-slash fa-xl' : 'fa-solid fa-eye fa-xl'" :title="account.showPassword ? 'Hide' : 'Show'"></i></button>
+      <button @click="editAccount(account)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
+
 
     <!--Accounts tab content-->
     <div v-show="currentTab === 'accounts'" class="tab-content">
@@ -30,7 +44,9 @@
         <button @click="togglePassword(account)"><i :class="account.showPassword ? 'fa-solid fa-eye-slash fa-xl' : 'fa-solid fa-eye fa-xl'" :title="account.showPassword ? 'Hide' : 'Show'"></i></button>
         <button @click="editAccount(account)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
       </div>
+
   </div>
+    </div>
 
     <!--Address tab content-->
     <div v-show="currentTab === 'addresses'" class="tab-content">
@@ -51,6 +67,17 @@
       <button @click="showForm('note')">Add Note</button>
       <button @click="showForm('address')">Add Address</button>
     </div>
+
+    <form v-show="formType === 'account'">
+    <input v-model="newAccount.name" placeholder="URL/Account">
+    <input v-model="newAccount.email" placeholder="Username/Email">
+    <input v-model="newAccount.password" placeholder="Password">
+    <div class="button-group">
+      <button @click.prevent="saveAccount">Save</button>
+      <button @click="cancel">Cancel</button>
+    </div> 
+    <button class="delete-button" @click.prevent="deleteAccount(newAccount)"><i class="fa-regular fa-trash-can fa-xl"></i></button>
+  </form>
   
     <!--Form for adding a new Account-->
     <form v-show="formType === 'account'">
@@ -417,6 +444,7 @@ export default {
   background-color: #f0f0f0; 
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
   justify-content: space-evenly;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: larger;
 }
 .tab-content div button {
@@ -460,5 +488,3 @@ export default {
   margin-right: 0;
 }
 </style>
-
-

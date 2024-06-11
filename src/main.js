@@ -10,8 +10,10 @@ import 'zxcvbn';
 
 const routes = [
   
+  { path: "/register", component: () => import("./components/Register.vue") },
   { path: '/', component: () => import('./components/LoginRegisterModal.vue')},
   { path: "/loginregister", component: () => import("./components/LoginRegisterModal.vue") },
+  { path: "/vault", component: Vault, meta: { requiresAuth: true } },
   { path: "/generator", component: () => import("./components/Generator.vue"), meta: { requiresAuth:true } },
   { path: '/secure-score', component:() => import("./components/PasswordStrengthChecker.vue"),meta: { requiresAuth:true }  },
 ];
