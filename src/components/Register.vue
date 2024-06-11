@@ -24,7 +24,7 @@ const register = () => {
   createUserWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((userCredential) => {
       console.log("Successfully registered!");
-      router.push('/vault');
+      router.push('/generator');
     })
     .catch((error) => {
       console.log(error.code);
@@ -37,7 +37,7 @@ const signInWithGoogle = () => {
   signInWithPopup(getAuth(), provider)
     .then((result) => {
       console.log(result.user);
-      router.push("/vault");
+      router.push("/generator");
     })
     .catch((error) => {
       console.error(error); 
