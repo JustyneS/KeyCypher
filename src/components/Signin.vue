@@ -79,7 +79,7 @@ const signInWithGoogle = () => {
 <style scoped>
 .signin-container {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 250px auto 0 auto; 
   padding: 20px;
   border-radius: 5px;
   background-color: #f9f9f9;

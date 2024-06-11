@@ -12,3 +12,4 @@ npm install vue-router
 npm install firebase
 npm install -D @vue/cli-service
 npm install @fortawesome/fontawesome-free
+npm install zxcvbn

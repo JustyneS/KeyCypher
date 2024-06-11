@@ -7,7 +7,6 @@
     </div>
 
     <div v-show="currentTab === 'notes'" class="tab-content">
-
       <!-- Display notes from the database here -->
       <div v-for="note in notes" :key="note.id">
         <h2>{{ note.accountName }}</h2>
@@ -15,21 +14,20 @@
         <button @click="editNote(note)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
       </div>
     </div>
-    <div v-show="currentTab === 'accounts'" class="tab-content">
 
+    <div v-show="currentTab === 'accounts'" class="tab-content">
       <!-- Display accounts from the database here -->
-    <div class="account-list-item" v-for="account in accounts" :key="account.name">
-    <div>{{ account.name }}</div>
-    <div>{{ account.email }}</div>
-    <div v-if="account.showPassword">{{ account.password }}</div>
-      <div v-else>••••••••</div>
-      <button @click="togglePassword(account)"><i :class="account.showPassword ? 'fa-solid fa-eye-slash fa-xl' : 'fa-solid fa-eye fa-xl'" :title="account.showPassword ? 'Hide' : 'Show'"></i></button>
-      <button @click="editAccount(account)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
+      <div class="account-list-item" v-for="account in accounts" :key="account.name">
+        <div>{{ account.name }}</div>
+        <div>{{ account.email }}</div>
+        <div v-if="account.showPassword">{{ account.password }}</div>
+        <div v-else>••••••••</div>
+        <button @click="togglePassword(account)"><i :class="account.showPassword ? 'fa-solid fa-eye-slash fa-xl' : 'fa-solid fa-eye fa-xl'" :title="account.showPassword ? 'Hide' : 'Show'"></i></button>
+        <button @click="editAccount(account)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
+      </div>
   </div>
-    </div>
 
     <div v-show="currentTab === 'addresses'" class="tab-content">
-
       <!-- Display addresses from the database here -->
       <div v-for="address in addresses" :key="address.id">
         <h2>{{ address.firstName }} {{ address.lastName }}</h2>
@@ -46,7 +44,7 @@
       <button @click="showForm('address')">Add Address</button>
     </div>
 
-    <form v-show="formType === 'account'">
+  <form v-show="formType === 'account'">
     <input v-model="newAccount.name" placeholder="URL/Account">
     <input v-model="newAccount.email" placeholder="Username/Email">
     <input v-model="newAccount.password" placeholder="Password">
@@ -396,7 +394,6 @@ export default {
   background-color: #f0f0f0; 
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
   justify-content: space-evenly;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: larger;
 }
 .tab-content div button {
