@@ -19,9 +19,12 @@
       </div>
     </div>
 
+  
+
+
     <!--Accounts tab content-->
     <div v-show="currentTab === 'accounts'" class="tab-content">
-      <!-- Display accounts from the database here -->
+      <!-- Displaying Accounts from Firebase-->
       <div class="account-list-item" v-for="account in accounts" :key="account.name">
         <div>{{ account.name }}</div>
         <div>{{ account.email }}</div>
