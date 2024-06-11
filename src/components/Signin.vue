@@ -56,7 +56,6 @@ const signIn = () => {
     })
     .catch((error) => {
       console.log(error.code);
-
       switch (error.code) {
         case "auth/invalid-email":
           errMsg.value = "Invalid email";
@@ -94,7 +93,7 @@ const resetSession = () => {
 
 // Function to start the session timer
 const startSessionTimer = () => {
-  sessionTimeout = setTimeout(resetSession, 10000); // set 15 minutes limit
+  sessionTimeout = setTimeout(resetSession, 900000); // set 15 minutes limit
 };
 
 // Function to clear the session timer
@@ -115,7 +114,7 @@ const signOutUser = () => {
     .then(() => {
       console.log("User signed out");
       
-      router.push("/loginregister");
+      router.push("/signin");
     })
     .catch((error) => {
       console.log(error);
@@ -130,7 +129,7 @@ startSessionTimer();
 <style scoped>
 .signin-container {
   max-width: 400px;
-  margin: 250px auto 0 auto; 
+  margin: 0 auto;
   padding: 20px;
   border-radius: 5px;
   background-color: #f9f9f9;

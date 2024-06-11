@@ -1,13 +1,15 @@
 <template>
   <div class="vault">
+    <!--Navigation buttons for switching between accounts, notes, and addresses tabs-->
     <div class="nav-buttons">
       <button class="nav-button" @click="currentTab = 'accounts'" :class="{ 'active-tab': currentTab === 'accounts' }">Passwords</button>
       <button class="nav-button" @click="currentTab = 'notes'" :class="{ 'active-tab': currentTab === 'notes' }">Notes</button>
       <button class="nav-button" @click="currentTab = 'addresses'" :class="{ 'active-tab': currentTab === 'addresses' }">Addresses</button>
     </div>
 
+    <!--Notes tab content-->
     <div v-show="currentTab === 'notes'" class="tab-content">
-      <!-- Display notes from the database here -->
+      <!-- Displaying Notes from Firebase -->
       <div v-for="note in notes" :key="note.id">
         <h2>{{ note.accountName }}</h2>
         <p>{{ note.text }}</p>
@@ -15,20 +17,24 @@
       </div>
     </div>
 
+    <!--Accounts tab content-->
     <div v-show="currentTab === 'accounts'" class="tab-content">
-      <!-- Display accounts from the database here -->
+      <!-- Displaying Accounts from Firebase-->
       <div class="account-list-item" v-for="account in accounts" :key="account.name">
         <div>{{ account.name }}</div>
         <div>{{ account.email }}</div>
         <div v-if="account.showPassword">{{ account.password }}</div>
         <div v-else>••••••••</div>
+        </div>
+        <!--Button to toggle password visibility-->
         <button @click="togglePassword(account)"><i :class="account.showPassword ? 'fa-solid fa-eye-slash fa-xl' : 'fa-solid fa-eye fa-xl'" :title="account.showPassword ? 'Hide' : 'Show'"></i></button>
         <button @click="editAccount(account)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
       </div>
   </div>
 
+    <!--Address tab content-->
     <div v-show="currentTab === 'addresses'" class="tab-content">
-      <!-- Display addresses from the database here -->
+      <!-- Displaying Addresses from Firebase-->
       <div v-for="address in addresses" :key="address.id">
         <h2>{{ address.firstName }} {{ address.lastName }}</h2>
         <p>Address: {{ address.line1 }}, {{ address.suburb }}, {{ address.postcode }}</p>
@@ -37,34 +43,40 @@
       </div>
     </div>
 
+    <!--Buttons to show the options for adding a new Account, Note, or Address-->
     <button class="add-button" @click="showOptions = !showOptions" title="Add new"><i class="fa-solid fa-plus"></i></button>
     <div class="options" v-show="showOptions">
+      <!--Buttons to add new Account, Note, or Address into Firebase-->
       <button @click="showForm('account')">Add Account</button>
       <button @click="showForm('note')">Add Note</button>
       <button @click="showForm('address')">Add Address</button>
     </div>
-
-  <form v-show="formType === 'account'">
-    <input v-model="newAccount.name" placeholder="URL/Account">
-    <input v-model="newAccount.email" placeholder="Username/Email">
-    <input v-model="newAccount.password" placeholder="Password">
-    <div class="button-group">
-      <button @click.prevent="saveAccount">Save</button>
-      <button @click="cancel">Cancel</button>
-    </div> 
-    <button class="delete-button" @click.prevent="deleteAccount(newAccount)"><i class="fa-regular fa-trash-can fa-xl"></i></button>
-  </form>
   
-  <form v-show="formType === 'note'">
-    <input v-model="newNote.accountName" placeholder="Account Name">
-    <textarea v-model="newNote.text" placeholder="Note"></textarea>
-    <div class="button-group">
-      <button @click.prevent="saveNote">Save</button>
-      <button @click="cancel">Cancel</button>
-    </div>
-    <button class="delete-button" @click.prevent="deleteNote(newNote)"><i class="fa-regular fa-trash-can fa-xl"></i></button>
+    <!--Form for adding a new Account-->
+    <form v-show="formType === 'account'">
+      <input v-model="newAccount.name" placeholder="URL/Account">
+      <input v-model="newAccount.email" placeholder="Username/Email">
+      <input v-model="newAccount.password" placeholder="Password">
+      <div class="button-group">
+        <!--Save & Cancel buttons-->
+        <button @click.prevent="saveAccount">Save</button>
+        <button @click="cancel">Cancel</button>
+      </div> 
+      <button class="delete-button" @click.prevent="deleteAccount(newAccount)"><i class="fa-regular fa-trash-can fa-xl"></i></button>
     </form>
-
+    
+    <!--Form for adding a new Note-->
+    <form v-show="formType === 'note'">
+      <input v-model="newNote.accountName" placeholder="Account Name">
+      <textarea v-model="newNote.text" placeholder="Note"></textarea>
+      <div class="button-group">
+        <button @click.prevent="saveNote">Save</button>
+        <button @click="cancel">Cancel</button>
+      </div>
+      <button class="delete-button" @click.prevent="deleteNote(newNote)"><i class="fa-regular fa-trash-can fa-xl"></i></button>
+    </form>
+    
+    <!--Form for adding a new Address-->
     <form v-show="formType === 'address'">
       <input v-model="newAddress.firstName" placeholder="First Name">
       <input v-model="newAddress.lastName" placeholder="Last Name">
@@ -73,15 +85,15 @@
       <input v-model="newAddress.postcode" placeholder="Postcode">
       <input v-model="newAddress.phoneNumber" placeholder="Phone Number">
       <div class="button-group">
-      <button @click.prevent="saveAddress">Save</button>
-      <button @click="cancel">Cancel</button>
-    </div>
-    <button class="delete-button" @click.prevent="deleteAddress(newAddress)"><i class="fa-regular fa-trash-can fa-xl"></i></button>
+        <button @click.prevent="saveAddress">Save</button>
+        <button @click="cancel">Cancel</button>
+      </div>
+      <button class="delete-button" @click.prevent="deleteAddress(newAddress)"><i class="fa-regular fa-trash-can fa-xl"></i></button>
     </form>
-  </div>
 </template>
 
 <script>
+//Firebase modules
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 
@@ -89,11 +101,12 @@ export default {
   name: 'Vault',
   data() {
     return {
-      showOptions: false,
-      formType: null,
+      showOptions: false, //Option visibility
+      formType: null, 
       newAccount: { name: '', email: '', password: '' },
       newNote: { accountName: '', text: '' },
       newAddress: { firstName: '', lastName: '', line1: '', suburb: '', postcode: '', phoneNumber: '' },
+      // Arrays to store fetched data
       accounts: [], 
       currentTab: "accounts",
       notes: [],
@@ -101,14 +114,17 @@ export default {
     };
   },
   created() {
+    // Fetch data when a component is created
     this.fetchData();
   },
 
   methods: {
+    //Showing the form based on type
     showForm(type) {
       this.formType = type;
       this.showOptions = false;
     },
+    //Function to add a new Account to Firebase
     addAccount() {
       firebase.database().ref('accounts/' + this.newAccount.name).set(this.newAccount)
         .then(() => {
@@ -117,6 +133,7 @@ export default {
         })
         .catch(error => console.error('Error adding account: ', error));
     },
+    //Function to add a new Note to Firebase
     addNote() {
       firebase.database().ref('notes/' + this.newNote.accountName).set(this.newNote)
         .then(() => {
@@ -125,6 +142,7 @@ export default {
         })
         .catch(error => console.error('Error adding note: ', error));
     },
+    //Function to add a new Address to Firebase
     addAddress() {
       firebase.database().ref('addresses/' + this.newAddress.firstName + this.newAddress.lastName).set(this.newAddress)
         .then(() => {
@@ -134,12 +152,10 @@ export default {
       .catch(error => console.error('Error adding address: ', error));
     },
     cancel() {
-      this.newAccount = { name: '', email: '', password: '' };
-      this.newNote = { accountName: '', text: '' };
-      this.newAddress = { firstName: '', lastName: '', line1: '', suburb: '', postcode: '', phoneNumber: '' };
-      this.formType = null;
+      this.resetForm();
     },
 
+    //Function to fetch Notes data 
     fetchData() {
       firebase.database().ref('notes').on('value', snapshot => {
         const notes = snapshot.val();
@@ -148,6 +164,7 @@ export default {
           this.notes.push({ ...notes[id], id: id });
         }
       });
+      //Function to fetch Accounts data
       firebase.database().ref('accounts').on('value', snapshot => {
         const accounts = snapshot.val();
         this.accounts = [];
@@ -155,6 +172,7 @@ export default {
           this.accounts.push({ ...accounts[id], id: id, showPassword: false });
         }
       });
+      //Function to fetch Address data
       firebase.database().ref('addresses').on('value', snapshot => {
         const addresses = snapshot.val();
         this.addresses = [];
@@ -163,13 +181,18 @@ export default {
         }
       });
     },
+    //Function to toggle password visibility
     togglePassword(account) {
+      if (account) {
       account.showPassword = !account.showPassword;
+      }
     },
+    //Function to edit an Account
     editAccount(account) {
       this.newAccount = { ...account };
       this.formType = 'account';
     },
+    //Functipon to save an Account
     saveAccount() {
       if (this.newAccount.id) {
       // Update the account in Firebase
@@ -189,10 +212,12 @@ export default {
         this.formType = null;
       }
     },
+    //Function to edit a Note
     editNote(note) {
       this.newNote = { ...note };
       this.formType = 'note';
     },
+    //Function to save a note
     saveNote() {
       if (this.newNote.id) {
     // Update the note in Firebase
@@ -218,6 +243,7 @@ export default {
         this.formType = null;
       }
     },
+    //Function to edit an Address
     editAddress(address) {
       this.newAddress = { ...address, id: address.id };
       this.formType = 'address';
@@ -241,8 +267,7 @@ export default {
       }
     },
     cancel() {
-      this.newAccount = { name: '', email: '', password: '' };
-      this.formType = null;
+      this.resetForm();
     },
   },
 };

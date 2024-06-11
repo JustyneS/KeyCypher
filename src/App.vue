@@ -62,5 +62,6 @@ const handleSubmit = async () => {
 /* Global styles */
 body {
   background-color: #D9D9D9;
+  font-family: Arial, Helvetica, sans-serif;
 }
 </style>

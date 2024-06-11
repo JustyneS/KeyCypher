@@ -1,21 +1,17 @@
-import '@fortawesome/fontawesome-free/css/all.css'
 import { createApp } from 'vue';
 import App from './App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
-import Vault from './components/Vault.vue'; 
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import 'zxcvbn';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const routes = [
-  
-  { path: '/', component: () => import('./components/LoginRegisterModal.vue')},
-  { path: "/loginregister", component: () => import("./components/LoginRegisterModal.vue") },
-  { path: "/generator", component: () => import("./components/Generator.vue"), meta: { requiresAuth:true } },
-  { path: '/secure-score', component:() => import("./components/PasswordStrengthChecker.vue"),meta: { requiresAuth:true }  },
+  { path: '/', component: () => import('./components/LoginRegisterModal.vue') },
+  { path: '/loginregister', component: () => import('./components/LoginRegisterModal.vue') },
+  { path: '/generator', component: () => import('./components/Generator.vue'), meta: { requiresAuth: true } },
+  { path: '/secure-score', component: () => import('./components/PasswordStrengthChecker.vue'), meta: { requiresAuth: true } },
+  { path: '/vault', component: () => import('./components/Vault.vue'), meta: { requiresAuth: true } },
 ];
-
 
 const router = createRouter({
   history: createWebHistory(),
@@ -23,7 +19,7 @@ const router = createRouter({
 });
 
 const getCurrentUser = () => {
-  return new Promise((resolve,reject) => {
+  return new Promise((resolve, reject) => {
     const removeListener = onAuthStateChanged(
       getAuth(),
       (user) => {
@@ -31,17 +27,17 @@ const getCurrentUser = () => {
         resolve(user);
       },
       reject
-    )
-  })
-}
+    );
+  });
+};
 
 router.beforeEach(async (to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
     if (await getCurrentUser()) {
       next();
     } else {
-      alert("you dont have access!");
-      next("/loginregister");
+      alert("You don't have access!");
+      next('/loginregister');
     }
   } else {
     next();
