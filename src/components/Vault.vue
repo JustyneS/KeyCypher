@@ -9,53 +9,41 @@
 
     <!--Notes tab content-->
     <div v-show="currentTab === 'notes'" class="tab-content">
-
       <!-- Displaying Notes from Firebase -->
-
       <div v-for="note in notes" :key="note.id">
+      <div>
         <h2>{{ note.accountName }}</h2>
         <p>{{ note.text }}</p>
-        <button @click="editNote(note)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
+      </div>
+      <button @click="editNote(note)" class="editButton" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
       </div>
     </div>
 
     <!--Accounts tab content-->
     <div v-show="currentTab === 'accounts'" class="tab-content">
       <!-- Display accounts from the database here -->
-    <div class="account-list-item" v-for="account in accounts" :key="account.name">
-    <div>{{ account.name }}</div>
-    <div>{{ account.email }}</div>
-    <div v-if="account.showPassword">{{ account.password }}</div>
-      <div v-else>••••••••</div>
-      <button @click="togglePassword(account)"><i :class="account.showPassword ? 'fa-solid fa-eye-slash fa-xl' : 'fa-solid fa-eye fa-xl'" :title="account.showPassword ? 'Hide' : 'Show'"></i></button>
-      <button @click="editAccount(account)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
-
-
-    <!--Accounts tab content-->
-    <div v-show="currentTab === 'accounts'" class="tab-content">
-      <!-- Displaying Accounts from Firebase-->
       <div class="account-list-item" v-for="account in accounts" :key="account.name">
         <div>{{ account.name }}</div>
         <div>{{ account.email }}</div>
         <div v-if="account.showPassword">{{ account.password }}</div>
         <div v-else>••••••••</div>
-        </div>
         <!--Button to toggle password visibility-->
         <button @click="togglePassword(account)"><i :class="account.showPassword ? 'fa-solid fa-eye-slash fa-xl' : 'fa-solid fa-eye fa-xl'" :title="account.showPassword ? 'Hide' : 'Show'"></i></button>
-        <button @click="editAccount(account)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
+        <button @click="editAccount(account)" class="editButton" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
       </div>
-
-  </div>
     </div>
 
     <!--Address tab content-->
     <div v-show="currentTab === 'addresses'" class="tab-content">
-      <!-- Displaying Addresses from Firebase-->
-      <div v-for="address in addresses" :key="address.id">
+
+    <!-- Displaying Addresses from Firebase-->
+    <div v-for="address in addresses" :key="address.id">
+      <div>
         <h2>{{ address.firstName }} {{ address.lastName }}</h2>
         <p>Address: {{ address.line1 }}, {{ address.suburb }}, {{ address.postcode }}</p>
         <p>Phone Number: {{ address.phoneNumber }}</p>
-        <button @click="editAddress(address)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
+      </div>
+      <button @click="editAddress(address)" class="editButton" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
       </div>
     </div>
 
@@ -68,17 +56,6 @@
       <button @click="showForm('address')">Add Address</button>
     </div>
 
-    <form v-show="formType === 'account'">
-    <input v-model="newAccount.name" placeholder="URL/Account">
-    <input v-model="newAccount.email" placeholder="Username/Email">
-    <input v-model="newAccount.password" placeholder="Password">
-    <div class="button-group">
-      <button @click.prevent="saveAccount">Save</button>
-      <button @click="cancel">Cancel</button>
-    </div> 
-    <button class="delete-button" @click.prevent="deleteAccount(newAccount)"><i class="fa-regular fa-trash-can fa-xl"></i></button>
-  </form>
-  
     <!--Form for adding a new Account-->
     <form v-show="formType === 'account'">
       <input v-model="newAccount.name" placeholder="URL/Account">
@@ -117,7 +94,9 @@
       </div>
       <button class="delete-button" @click.prevent="deleteAddress(newAddress)"><i class="fa-regular fa-trash-can fa-xl"></i></button>
     </form>
+  </div>
 </template>
+
 
 <script>
 //Firebase modules
@@ -365,7 +344,6 @@ export default {
   color: white;
 }
 
-
 .vault {
   display: flex;
   justify-content: center;
@@ -414,6 +392,13 @@ export default {
   margin-bottom: 10px; 
 }
 
+.editButton {
+  border: none;
+  cursor: pointer;
+  background: none;
+  margin-left: auto; /* Pushes the button to the right */
+}
+
 .vault .add-button {
   position: fixed;
   bottom: 20px;
@@ -447,20 +432,34 @@ export default {
   font-family: Arial, Helvetica, sans-serif;
   font-size: larger;
 }
-.tab-content div button {
-   margin-left: 10px;
+
+.tab-content > div {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.tab-content > div:last-child {
+  border-bottom: none;
+}
+
+.tab-content div button {
+  margin-left: 10px;
+}
+
 .account-list-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  border-bottom: 1px solid #ccc;
 }
+
 .account-list-item div {
   flex: 1; 
   text-align: center; 
 }
+
 .account-list-item button {
   border: none;
   background: none;
