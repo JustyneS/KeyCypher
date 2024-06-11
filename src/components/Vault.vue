@@ -19,16 +19,7 @@
       </div>
     </div>
 
-    <!--Accounts tab content-->
-    <div v-show="currentTab === 'accounts'" class="tab-content">
-      <!-- Display accounts from the database here -->
-    <div class="account-list-item" v-for="account in accounts" :key="account.name">
-    <div>{{ account.name }}</div>
-    <div>{{ account.email }}</div>
-    <div v-if="account.showPassword">{{ account.password }}</div>
-      <div v-else>••••••••</div>
-      <button @click="togglePassword(account)"><i :class="account.showPassword ? 'fa-solid fa-eye-slash fa-xl' : 'fa-solid fa-eye fa-xl'" :title="account.showPassword ? 'Hide' : 'Show'"></i></button>
-      <button @click="editAccount(account)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
+  
 
 
     <!--Accounts tab content-->
@@ -39,7 +30,6 @@
         <div>{{ account.email }}</div>
         <div v-if="account.showPassword">{{ account.password }}</div>
         <div v-else>••••••••</div>
-        </div>
         <!--Button to toggle password visibility-->
         <button @click="togglePassword(account)"><i :class="account.showPassword ? 'fa-solid fa-eye-slash fa-xl' : 'fa-solid fa-eye fa-xl'" :title="account.showPassword ? 'Hide' : 'Show'"></i></button>
         <button @click="editAccount(account)" title="edit details"><i class="fa-solid fa-gear fa-xl"></i></button>
