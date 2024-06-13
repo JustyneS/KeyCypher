@@ -4,7 +4,7 @@
     <li><router-link to="/vault" class="vault-link"><i class="fa-solid fa-vault fa-2xl"></i><span> Vault </span></router-link></li> 
     <li><router-link to="/generator" class="generator-link"><i class="fa-solid fa-key fa-2xl"></i><span> Generator</span></router-link></li>
     <li><router-link to="/secure-score" class="score-link"><i class="fa-solid fa-shield-virus fa-2xl"></i><span> Secure Score</span></router-link></li>
-    <li><i class="fa-solid fa-user-gear fa-2xl"></i><span> Account Settings</span></li>
+    <li><router-link to="/account-settings" class="accsettings-link"> <i class="fa-solid fa-user-gear fa-2xl"></i><span> Account Settings</span></router-link></li>
     <li v-if="!isLoggedIn"><router-link to="/loginregister"><i class="fa-solid fa-sign-in-alt fa-2xl"></i><span>Login</span></router-link></li>
     <li v-if="isLoggedIn" @click="handleSignOut" class="sign-out-btn"><i class="fa-solid fa-sign-out-alt fa-2xl"></i><span>Sign out</span></li>
   </div>
