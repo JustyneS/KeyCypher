@@ -1,10 +1,15 @@
 <template>
+  <!--Side menu container-->
   <div :class="{ menu: true, open: show, collapsed: !show }">
-    <button @click="show = !show" title="Expand"><i class="fa-solid fa-arrow-right"></i></button>
+    <!--Button to expand and retract menu-->
+    <button @click="show = !show" class="expandButton" title="Expand"><i class="fa-solid fa-arrow-right"></i></button>
+    <!--Navigation links-->
     <li><router-link to="/vault" class="vault-link"><i class="fa-solid fa-vault fa-2xl"></i><span> Vault </span></router-link></li> 
     <li><router-link to="/generator" class="generator-link"><i class="fa-solid fa-key fa-2xl"></i><span> Generator</span></router-link></li>
     <li><router-link to="/secure-score" class="score-link"><i class="fa-solid fa-shield-virus fa-2xl"></i><span> Secure Score</span></router-link></li>
     <li><router-link to="/account-settings" class="accsettings-link"> <i class="fa-solid fa-user-gear fa-2xl"></i><span> Account Settings</span></router-link></li>
+    <li><i class="fa-solid fa-user-gear fa-2xl"></i><span> Account Settings</span></li>
+    <!--Conditional rendering of links based on if the user is logged in or out-->
     <li v-if="!isLoggedIn"><router-link to="/loginregister"><i class="fa-solid fa-sign-in-alt fa-2xl"></i><span>Login</span></router-link></li>
     <li v-if="isLoggedIn" @click="handleSignOut" class="sign-out-btn"><i class="fa-solid fa-sign-out-alt fa-2xl"></i><span>Sign out</span></li>
   </div>
@@ -17,17 +22,20 @@ import { getAuth } from 'firebase/auth';
 export default {
   name: 'SideNav',
   props: {
-    isLoggedIn: Boolean,
+    isLoggedIn: Boolean, //Prop to check user is logged in 
   },
   data() {
     return {
+      //Visibility control state
       show: false,
     };
   },
   methods: {
+    //Sign out method
     handleSignOut() {
       const auth = getAuth();
       signOut(auth).then(() => {
+        //Redirect login/register page after user signs out
         this.$router.push("/loginregister");
       });
     },
@@ -45,7 +53,7 @@ export default {
   color: #C1E5E3; 
   overflow-x: hidden;
   overflow-y: auto;
-  transition: 0.5s;
+  transition: width 0.5s;
   border-width: 15px;
   height: 90%;
   list-style-type: none;
@@ -96,7 +104,7 @@ export default {
 .menu.open li span {
   display: inline; 
   text-decoration: none;
-  margin-left:20px;
+  margin-left: 20px;
 }
 
 button {
@@ -105,13 +113,19 @@ button {
   border: none;
   cursor: pointer; 
   outline: none;
-  font-size: 40px;
-  top: 2px;
+  font-size: 24px; 
   position: absolute;
-  margin-left: 20px;
+  left: 45px;
+  top: 2px;
+  transition: left 0.5s, transform 0.5s;
 }
 
-button:hover{
+.menu.open button {
+  left: 190px; 
+  transform: rotate(180deg);
+}
+
+button:hover {
   color: #4ac3ba;
 }
 
@@ -137,3 +151,4 @@ a:visited {
   background-color: #f39891; 
 }
 </style>
+
