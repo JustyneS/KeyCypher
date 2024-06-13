@@ -2,7 +2,6 @@
     <div class="account-settings">
       <h2>Account Settings</h2>
       <form @submit.prevent="updateSettings">
-        
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" v-model="email" />
@@ -86,7 +85,7 @@
     successMsg.value = "";
   };
 
-  
+
   </script>
   
   <style scoped>
