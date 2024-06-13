@@ -2,7 +2,7 @@
   <div id="app">
     <Header />
     <SideNav :isLoggedIn="isLoggedIn" />
-    <router-view />
+    <router-view></router-view>
   </div>
 </template>
 
