@@ -137,7 +137,7 @@ a:visited {
 
 .sign-out-btn {
   cursor: pointer;
-  color: #fff; 
+  color: #C1E5E3; 
   border: none;
   padding: 2px 2px; 
   border-radius: 5px;
