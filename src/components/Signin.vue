@@ -114,7 +114,7 @@ const signOutUser = () => {
     .then(() => {
       console.log("User signed out");
       
-      router.push("/signin");
+      router.push("/loginregister");
     })
     .catch((error) => {
       console.log(error);
